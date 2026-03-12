@@ -1,0 +1,261 @@
+@import url("https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Figtree:wght@300;400;500;600;700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Deep dark base */
+    --background: 0.08 0 0;
+    --foreground: 0.97 0 0;
+
+    --card: 0.12 0.005 145;
+    --card-foreground: 0.97 0 0;
+
+    --popover: 0.14 0.005 145;
+    --popover-foreground: 0.97 0 0;
+
+    /* Vivid electric green */
+    --primary: 0.75 0.28 145;
+    --primary-foreground: 0.06 0 0;
+
+    /* Subtle secondary */
+    --secondary: 0.16 0.005 145;
+    --secondary-foreground: 0.97 0 0;
+
+    --muted: 0.18 0.005 145;
+    --muted-foreground: 0.52 0.02 145;
+
+    /* Electric green accent */
+    --accent: 0.75 0.28 145;
+    --accent-foreground: 0.06 0 0;
+
+    /* Red for likes/destructive */
+    --destructive: 0.55 0.25 15;
+    --destructive-foreground: 0.97 0 0;
+
+    /* Blue for playlist */
+    --playlist: 0.65 0.22 260;
+    --playlist-foreground: 0.97 0 0;
+
+    --border: 0.2 0.01 145;
+    --input: 0.16 0.005 145;
+    --ring: 0.75 0.28 145;
+
+    --radius: 0.75rem;
+
+    --chart-1: 0.75 0.28 145;
+    --chart-2: 0.65 0.22 260;
+    --chart-3: 0.55 0.25 15;
+    --chart-4: 0.72 0.18 80;
+    --chart-5: 0.68 0.2 200;
+
+    --sidebar: 0.08 0 0;
+    --sidebar-foreground: 0.97 0 0;
+    --sidebar-primary: 0.75 0.28 145;
+    --sidebar-primary-foreground: 0.06 0 0;
+    --sidebar-accent: 0.16 0.005 145;
+    --sidebar-accent-foreground: 0.97 0 0;
+    --sidebar-border: 0.2 0.01 145;
+    --sidebar-ring: 0.75 0.28 145;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-body antialiased;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    background-image: radial-gradient(
+        ellipse 80% 50% at 20% -10%,
+        oklch(0.75 0.28 145 / 0.06) 0%,
+        transparent 60%
+      ),
+      radial-gradient(
+        ellipse 60% 40% at 80% 110%,
+        oklch(0.65 0.22 260 / 0.05) 0%,
+        transparent 60%
+      );
+    background-attachment: fixed;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  ::-webkit-scrollbar {
+    width: 4px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-muted rounded-full;
+  }
+}
+
+@layer components {
+  /* Gradient text utility */
+  .text-gradient {
+    background: linear-gradient(
+      135deg,
+      oklch(0.82 0.28 145) 0%,
+      oklch(0.72 0.28 165) 50%,
+      oklch(0.78 0.2 200) 100%
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Hero glow behind title */
+  .hero-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    height: 300px;
+    background: radial-gradient(
+      ellipse at center,
+      oklch(0.75 0.28 145 / 0.12) 0%,
+      transparent 70%
+    );
+    pointer-events: none;
+    filter: blur(40px);
+  }
+
+  /* Bold gradient border card */
+  .card-gradient-border {
+    position: relative;
+    background: oklch(var(--card));
+    border: 1px solid oklch(var(--border));
+  }
+  .card-gradient-border::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(
+      135deg,
+      oklch(0.75 0.28 145 / 0.3) 0%,
+      transparent 50%,
+      oklch(0.65 0.22 260 / 0.2) 100%
+    );
+    -webkit-mask: linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  .waveform-bar {
+    @apply inline-block w-0.5 rounded-full bg-primary;
+    animation: waveform 1.2s ease-in-out infinite;
+  }
+
+  .waveform-bar:nth-child(1) {
+    animation-delay: 0s;
+    height: 8px;
+  }
+  .waveform-bar:nth-child(2) {
+    animation-delay: 0.1s;
+    height: 16px;
+  }
+  .waveform-bar:nth-child(3) {
+    animation-delay: 0.2s;
+    height: 10px;
+  }
+  .waveform-bar:nth-child(4) {
+    animation-delay: 0.15s;
+    height: 20px;
+  }
+  .waveform-bar:nth-child(5) {
+    animation-delay: 0.05s;
+    height: 12px;
+  }
+  .waveform-bar:nth-child(6) {
+    animation-delay: 0.25s;
+    height: 8px;
+  }
+  .waveform-bar:nth-child(7) {
+    animation-delay: 0.1s;
+    height: 18px;
+  }
+  .waveform-bar:nth-child(8) {
+    animation-delay: 0.3s;
+    height: 10px;
+  }
+
+  @keyframes waveform {
+    0%,
+    100% {
+      transform: scaleY(0.4);
+      opacity: 0.7;
+    }
+    50% {
+      transform: scaleY(1);
+      opacity: 1;
+    }
+  }
+
+  .waveform-static .waveform-bar {
+    animation: none;
+    transform: scaleY(0.4);
+    opacity: 0.4;
+  }
+
+  /* Song card hover */
+  .song-card-glow {
+    transition: box-shadow 0.3s ease, border-color 0.3s ease, transform 0.2s
+      ease;
+  }
+  .song-card-glow:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 0 0 1px oklch(0.75 0.28 145 / 0.4), 0 8px 32px
+      oklch(0.75 0.28 145 / 0.12), 0 2px 8px oklch(0 0 0 / 0.4);
+  }
+
+  .song-card-active {
+    box-shadow: 0 0 0 1px oklch(0.75 0.28 145 / 0.7), 0 8px 40px
+      oklch(0.75 0.28 145 / 0.2), 0 2px 8px oklch(0 0 0 / 0.5);
+  }
+
+  /* Pulsing primary glow for buttons */
+  .btn-glow {
+    box-shadow: 0 0 20px oklch(0.75 0.28 145 / 0.35), 0 4px 12px
+      oklch(0 0 0 / 0.4);
+    transition: box-shadow 0.2s ease, transform 0.1s ease;
+  }
+  .btn-glow:hover:not(:disabled) {
+    box-shadow: 0 0 32px oklch(0.75 0.28 145 / 0.5), 0 6px 16px
+      oklch(0 0 0 / 0.5);
+    transform: translateY(-1px);
+  }
+  .btn-glow:active:not(:disabled) {
+    transform: translateY(0);
+  }
+
+  audio {
+    color-scheme: dark;
+  }
+
+  /* Player line accent */
+  .player-accent-line {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      oklch(0.75 0.28 145 / 0.8) 30%,
+      oklch(0.72 0.25 165 / 0.8) 70%,
+      transparent 100%
+    );
+  }
+}
